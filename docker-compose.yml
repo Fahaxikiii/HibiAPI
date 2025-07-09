@@ -1,10 +1,5 @@
-version: "3.9"
-
 volumes:
   hibi_redis: {}
-
-networks:
-  hibi_net: {}
 
 services:
   redis:
@@ -26,14 +21,11 @@ services:
     build:
       dockerfile: Dockerfile
       context: .
-    restart: on-failure
-    networks:
-      - hibi_net
+    restart: always
+    network_mode: host
     depends_on:
       redis:
         condition: service_healthy
-    ports:
-      - "8080:8080"
     environment:
       PORT: "8080"
       FORWARDED_ALLOW_IPS: "*"
