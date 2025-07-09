@@ -13,6 +13,3 @@ WORKDIR /hibi
 RUN pip install .
 
 CMD hibiapi run --port $PORT --workers $PROCS
-
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-    CMD httpx --verbose --follow-redirects http://127.0.0.1:${PORT}
